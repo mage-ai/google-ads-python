@@ -70,7 +70,8 @@ def main(client, customer_id, run_job, user_list_id, offline_user_data_job_id):
         offline_user_data_job_id,
     )
 
-
+    
+# [START add_customer_match_user_list_3]
 def create_customer_match_user_list(client, customer_id):
     """Creates a Customer Match user list.
 
@@ -115,6 +116,7 @@ def create_customer_match_user_list(client, customer_id):
     )
 
     return user_list_resource_name
+    # [END add_customer_match_user_list_3]
 
 
 # [START add_customer_match_user_list]
@@ -355,7 +357,6 @@ def build_offline_user_data_job_operations(client):
                 address_info.country_code = record["country_code"]
                 address_info.postal_code = record["postal_code"]
                 user_data.user_identifiers.append(user_identifier)
-        # [END add_customer_match_user_list_2]
 
         # If the user_identifiers repeated field is not empty, create a new
         # OfflineUserDataJobOperation and add the UserData to it.
@@ -363,10 +364,12 @@ def build_offline_user_data_job_operations(client):
             operation = client.get_type("OfflineUserDataJobOperation")
             operation.create = user_data
             operations.append(operation)
+        # [END add_customer_match_user_list_2]
 
     return operations
 
 
+# [START add_customer_match_user_list_4]
 def check_job_status(client, customer_id, offline_user_data_job_resource_name):
     """Retrieves, checks, and prints the status of the offline user data job.
 
@@ -421,6 +424,7 @@ def check_job_status(client, customer_id, offline_user_data_job_resource_name):
             "To check the status of the job periodically, use the following "
             f"GAQL query with GoogleAdsService.Search: {query}"
         )
+    # [END add_customer_match_user_list_4]
 
 
 def print_customer_match_user_list_info(
@@ -434,6 +438,7 @@ def print_customer_match_user_list_info(
         user_list_resource_name: The resource name of the user list to which to
             add users.
     """
+    # [START add_customer_match_user_list_5]
     googleads_service_client = client.get_service("GoogleAdsService")
 
     # Creates a query that retrieves the user list.
@@ -448,6 +453,7 @@ def print_customer_match_user_list_info(
     search_results = googleads_service_client.search(
         customer_id=customer_id, query=query
     )
+    # [END add_customer_match_user_list_5]
 
     # Prints out some information about the user list.
     user_list = next(iter(search_results)).user_list
@@ -491,7 +497,7 @@ def normalize_and_hash(s, remove_all_whitespace):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v13")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v14")
 
     parser = argparse.ArgumentParser(
         description="Adds a customer match user list for specified customer."
