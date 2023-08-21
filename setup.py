@@ -28,7 +28,7 @@ install_requires = [
     "proto-plus >= 1.19.6, < 2.0.0",
     "PyYAML >= 5.1, < 7.0",
     "setuptools >= 40.3.0",
-    "protobuf >= 3.12.0, < 5.0.0dev, !=3.18.*, !=3.19.*",
+    "protobuf == 3.19.6",
 ]
 
 with io.open("README.rst", "r", encoding="utf-8") as readme_file:
